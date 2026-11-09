@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Starters Labo — Nieuwe onkostennota (PurchaseForm.aspx?Type=E)",
+  "description": "Explored form definition for expense note automation. Default to Opslaan als concept; do not Verstuur unless user confirms.",
+  "formMeta": {
+    "portalUrl": "https://mijn.starterslabo.be",
+    "listPage": "/Views/Purchase.aspx",
+    "formPage": "/Views/PurchaseForm.aspx?Type=E",
+    "navigation": {
+      "steps": [
+        { "action": "login", "url": "/login.aspx" },
+        {
+          "action": "openMenu",
+          "selector": "#ctl00_dashboardBtns_Purchase",
+          "label": "Aankoop"
+        },
+        {
+          "action": "clickLink",
+          "text": "Nieuwe onkostennota",
+          "href": "/Views/PurchaseForm.aspx?Type=E",
+          "id": "ctl00_ContentPlaceLabo_PurchaseTable_btnNewExpenseNote"
+        }
+      ]
+    },
+    "technology": {
+      "platform": "ASP.NET WebForms",
+      "postback": true,
+      "viewStateRequired": true,
+      "invoiceTypeHidden": "hfInvoiceType=E",
+      "clientScripts": [
+        "/Public/Contents/scripts/buy.js",
+        "Telerik RadNumericTextBox (amount)",
+        "Telerik RadAsyncUpload (attachments)"
+      ]
+    },
+    "idPrefix": "ctl00_ContentPlaceLabo_PurchaseForm_"
+  },
+  "sections": [
+    {
+      "id": "expenseDetails",
+      "title": "Onkosten details",
+      "fields": ["title", "account", "amount", "date", "invoiceNr", "description"]
+    },
+    {
+      "id": "supplier",
+      "title": "Leverancier",
+      "note": "Pre-filled with own company for expense reimbursement; selector disabled",
+      "fields": ["supplierSelector", "supplierBlock"]
+    },
+    {
+      "id": "attachments",
+      "title": "Bijlagen",
+      "fields": ["attachment"]
+    },
+    {
+      "id": "actions",
+      "title": "Actions",
+      "fields": ["saveDraft", "send"]
+    }
+  ],
+  "fields": {
+    "title": {
+      "label": "Onderwerp",
+      "id": "ctl00_ContentPlaceLabo_PurchaseForm_TxtBoxTitle",
+      "htmlType": "text",
+      "required": true,
+      "placeholder": "Onderwerp"
+    },
+    "account": {
+      "label": "Rekening",
+      "id": "ctl00_ContentPlaceLabo_PurchaseForm_SelectPurchaseAccount",
+      "htmlType": "select",
+      "required": true,
+      "options": [
+        { "value": "230999", "label": "230999 - wachtrekening investeringen", "group": "Investering" },
+        { "value": "602000", "label": "602000 - aankopen handelsdiensten", "group": "Variabele kosten" },
+        { "value": "604000", "label": "604000 - aankopen handelsgoederen", "group": "Variabele kosten" },
+        { "value": "499000", "label": "499000 - wachtrekening vaste en variabele kosten", "group": "Vaste kosten" },
+        { "value": "610110", "label": "610110 - huur locaties", "group": "Vaste kosten" },
+        { "value": "610130", "label": "610130 - huur materiaal, machines, ...", "group": "Vaste kosten" },
+        { "value": "610999", "label": "610999 - andere kostencategorie dan vermeld", "group": "Vaste kosten" },
+        { "value": "612095", "label": "612095 - diverse kosten en klein materiaal ...", "group": "Vaste kosten" },
+        { "value": "612105", "label": "612105 - telefoon, gsm, internet", "group": "Vaste kosten" },
+        { "value": "612115", "label": "612115 - abonnementen boeken tijdschriften", "group": "Vaste kosten" },
+        { "value": "612125", "label": "612125 - software, website en onderhoud", "group": "Vaste kosten" },
+        { "value": "612300", "label": "612300 - bureelbenodigdheden en drukwerk", "group": "Vaste kosten" },
+        { "value": "613160", "label": "613160 - verzekering BA en andere", "group": "Vaste kosten" },
+        { "value": "613220", "label": "613220 - lidgelden en bijdragen", "group": "Vaste kosten" },
+        { "value": "613265", "label": "613265 - opleiding, seminaries en begeleidingen", "group": "Vaste kosten" },
+        { "value": "614100", "label": "614100 - publiciteitskosten", "group": "Vaste kosten" },
+        { "value": "614300", "label": "614300 - beurzen en standgelden", "group": "Vaste kosten" },
+        { "value": "614317", "label": "614317 - kilometervergoeding 0% verworpen (elektrisch of lichte vracht)", "group": "Vaste kosten" },
+        { "value": "614324", "label": "614324 - kilometervergoeding 60% verworpen", "group": "Vaste kosten" },
+        { "value": "614330", "label": "614330 - openbaar vervoer, ....", "group": "Vaste kosten" },
+        { "value": "614345", "label": "614345 - restaurantkosten", "group": "Vaste kosten" },
+        { "value": "614350", "label": "614350 - kosten van onthaal", "group": "Vaste kosten" },
+        { "value": "614505", "label": "614505 - relatiegeschenken", "group": "Vaste kosten" },
+        { "value": "620410", "label": "620410 - AC-vergoeding", "group": "Vaste kosten" }
+      ]
+    },
+    "amount": {
+      "label": "Bedrag",
+      "id": "ctl00_ContentPlaceLabo_PurchaseForm_TxtBoxAmount",
+      "htmlType": "text",
+      "control": "Telerik RadNumericTextBox",
+      "required": true,
+      "format": "European decimal (comma), e.g. 49,99"
+    },
+    "date": {
+      "label": "Datum",
+      "id": "ctl00_ContentPlaceLabo_PurchaseForm_InputInvoiceDate",
+      "htmlType": "date",
+      "required": true
+    },
+    "invoiceNr": {
+      "label": "Factuurnummer",
+      "id": "ctl00_ContentPlaceLabo_PurchaseForm_InputPurchaseNr",
+      "htmlType": "text",
+      "required": false
+    },
+    "description": {
+      "label": "Motivatie beroepskosten",
+      "id": "ctl00_ContentPlaceLabo_PurchaseForm_TxtBoxDescription",
+      "htmlType": "textarea",
+      "required": true
+    },
+    "supplierSelector": {
+      "label": "leverancier",
+      "id": "ctl00_ContentPlaceLabo_PurchaseForm_InputSupplierSelector",
+      "htmlType": "select",
+      "disabled": true,
+      "note": "Pre-filled with own company"
+    },
+    "attachment": {
+      "label": "Bijlagen",
+      "id": "ctl00_ContentPlaceLabo_PurchaseForm_fileUploaderfile0",
+      "htmlType": "file",
+      "required": false
+    },
+    "saveDraft": {
+      "label": "Opslaan als concept",
+      "id": "ctl00_ContentPlaceLabo_PurchaseForm_btnSaveConcept",
+      "htmlType": "submit",
+      "defaultAction": true
+    },
+    "send": {
+      "label": "Verstuur",
+      "id": "ctl00_ContentPlaceLabo_PurchaseForm_BtnSubmit",
+      "htmlType": "submit",
+      "requiresConfirmation": true
+    }
+  },
+  "accountHints": {
+    "software": "612125",
+    "saas": "612125",
+    "hosting": "612125",
+    "telefoon": "612105",
+    "internet": "612105",
+    "abonnement": "612115",
+    "boeken": "612115",
+    "kantoor": "612300",
+    "opleiding": "613265",
+    "restaurant": "614345",
+    "vervoer": "614330",
+    "kilometer": "614317",
+    "verzekering": "613160",
+    "lidgeld": "613220",
+    "reclame": "614100"
+  }
+}
